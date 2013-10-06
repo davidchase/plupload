@@ -749,6 +749,15 @@ plupload.Uploader = function(settings) {
 	 * @event Refresh
 	 * @param {plupload.Uploader} uploader Uploader instance sending the event.
 	 */
+	 
+	   /**
+         * Fires when just before a file is uploaded. This event enables you to override settings
+         * on the uploader instance before the file is uploaded.
+         *
+         * @event BeforeUpload
+         * @param {plupload.Uploader} uploader Uploader instance sending the event.
+         * @param {plupload.File} file File to be uploaded.
+         */
 
 	/**
 	 * Fires when the overall state is being changed for the upload queue.
@@ -1284,7 +1293,7 @@ plupload.Uploader = function(settings) {
 					}
 				}
 
-				function uploadNextChunk() {
+				self.bind("UploadChunk", function() {
 					var chunkBlob, formData, args, curChunkSize;
 
 					// File upload finished
@@ -1437,7 +1446,13 @@ plupload.Uploader = function(settings) {
 							xap_url: up.settings.silverlight_xap_url
 						});
 					}
-				}
+				});
+				
+				  function uploadNextChunk() {
+		                        if (self.trigger('BeforeUploadChunk', file)) {
+		                            self.trigger('UploadChunk');
+		                        }
+		                    }
 
 				blob = file.getSource();
 
