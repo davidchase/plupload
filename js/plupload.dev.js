@@ -1449,6 +1449,8 @@
 
                     blob = file.getSource();
 
+
+
                     // Start uploading chunks
                     if (!o.isEmptyObj(up.settings.resize) && runtimeCan(blob, 'send_binary_string') && !! ~o.inArray(blob.type, ['image/jpeg', 'image/png'])) {
                         // Resize if required
@@ -1460,7 +1462,7 @@
                     } else {
                         uploadNextChunk();
                     }
-                });
+                }); // end file upload
 
                 self.bind('UploadProgress', function(up, file) {
                     calcFile(file);
