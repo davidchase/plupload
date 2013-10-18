@@ -1,4 +1,3 @@
-
 /**
  * Plupload - multi-runtime File Uploader
  * v2.0.0beta
@@ -1446,7 +1445,7 @@
                                 xap_url: up.settings.silverlight_xap_url
                             });
                         }
-                    }
+                    } // end of the function definition uploadnextchunk
 
                     blob = file.getSource();
 
